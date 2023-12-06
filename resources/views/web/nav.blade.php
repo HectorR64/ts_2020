@@ -3,8 +3,7 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#carousel-example-generic">
           <!-- <img src="web/img/demo/logo-navbar.png" alt=""> -->
-          <span class=" "><img src="web/img/circ1.png" alt="" height="48px" width="55px"></span>
-          <h1>taco santo</h1>
+          <span class=" "><img src="web/img/circ1.png" alt="" height="48px" width="200px"></span>
         </a>
       </div>
       <div class="collapse navbar-collapse" id="ms-navbar">
