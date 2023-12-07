@@ -34,7 +34,7 @@ class CategoryController extends Controller {
 
                 // Eliminar la imagen asociada si no es la imagen por defecto
                 if ($imageName != 'default.png') {
-                    Storage::disk('local')->delete('category/'.$imageName);
+                    Storage::disk('local')->delete('public/category/' . $category->image);
                 }
 
                 return response()->json([
@@ -66,7 +66,8 @@ class CategoryController extends Controller {
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
                 // Guardar imagen en el disco local
-                Storage::disk('local')->putFileAs('category', $image, $imageName);
+                Storage::disk('local')->putFileAs('public/category', $image, $imageName);
+                $image->storeAs('public/category', $imageName, 'local');
 
             } else {
                 $imageName = 'default.png';
@@ -135,10 +136,10 @@ class CategoryController extends Controller {
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
                 // Eliminar la imagen antigua si existe en el disco local
-                Storage::disk('local')->delete('category/' . $category->image);
+                Storage::disk('local')->delete('public/category/' . $category->image);
 
                 // Guardar la nueva imagen en el disco local
-                $image->storeAs('category', $imageName, 'local');
+                $image->storeAs('public/category', $imageName, 'local');
             } else {
                 $imageName = $category->image;
             }

@@ -79,7 +79,7 @@ aria-expanded="true"
                         @foreach ($categorys as $category)
                             <tr>
                                 <td class="text-center">{{$category->id}}</td>
-                                <td> <img src="../../upload/category/{{$category->image}}"style="border-radius: 50%; width: 50px; height: 50px;"/></td>
+                                <td> <img src="{{asset('/storage/category')}}/{{$category->image}}"style="border-radius: 50%; width: 50px; height: 50px;"/></td>
                                 <td>{{$category->name}}</td>
                                 <td HEIGHT="80" WIDTH="300">
                                     <div class="form-check">
@@ -198,7 +198,6 @@ aria-expanded="true"
 
   <script>
     $(document).ready(function (){
-        // Javascript method's body can be found in assets/js/demos.js
         md.initDashboardPageCharts();
         $("#addCategory").click(function(){
           $("#CategoryModal").modal("show");
