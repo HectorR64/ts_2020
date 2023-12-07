@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use App\Models\Category;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller {
@@ -23,14 +23,33 @@ class CategoryController extends Controller {
     }
     public function destroy($id){
         if($id){
-            Category::find($id)->delete();
+            $category = Category::find($id);
+
+            if ($category) {
+                // Obtener el nombre de la imagen
+                $imageName = $category->image;
+
+                // Eliminar la categoría
+                $category->delete();
+
+                // Eliminar la imagen asociada si no es la imagen por defecto
+                if ($imageName != 'default.png') {
+                    Storage::disk('local')->delete('category/'.$imageName);
+                }
+
+                return response()->json([
+                    "message" => "Hecho! Dato eliminado exitosamente :)",
+                    "alert_type" => "success",
+                ]);
+            } else {
+                return response()->json([
+                    "message" => "Error! La categoría no existe.",
+                    "alert_type" => "error",
+                ]);
+            }
+        } else {
             return response()->json([
-                "message" => "Hecho! Dato eliminado excitosamente:)",
-                "alert_type" => "success",
-            ]);
-        }else{
-            return response()->json([
-                "message" => "Error! Ocurrio un problema!",
+                "message" => "Error! Ocurrió un problema!",
                 "alert_type" => "error",
             ]);
         }
@@ -45,10 +64,9 @@ class CategoryController extends Controller {
             if ($image) {
                 $currentDate = Carbon::now()->toDateString();
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-                if (!file_exists('upload/category')) {
-                    mkdir('upload/category', 0777, true);
-                }
-                $image->move(public_path('upload/category'), $imageName);
+
+                // Guardar imagen en el disco local
+                Storage::disk('local')->putFileAs('category', $image, $imageName);
 
             } else {
                 $imageName = 'default.png';
@@ -61,7 +79,7 @@ class CategoryController extends Controller {
            $store = $data->save();
            if($store){
                 return response()->json([
-                    'message' => 'Hecho: Dto guardado excitosamente',
+                    'message' => 'Hecho: Dato guardado excitosamente',
                     'alert_type' => 'success',
                 ]);
             }else{
@@ -115,14 +133,12 @@ class CategoryController extends Controller {
             if ($image) {
                 $currentDate = Carbon::now()->toDateString();
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-                if (!file_exists('upload/category')) {
-                    mkdir('upload/category', 0777, true);
-                }
-                if (file_exists('upload/category/' . $category->image)) {
-                    unlink('upload/category/' . $category->image);
-                }
-                $image->move(public_path('upload/category'), $imageName);
 
+                // Eliminar la imagen antigua si existe en el disco local
+                Storage::disk('local')->delete('category/' . $category->image);
+
+                // Guardar la nueva imagen en el disco local
+                $image->storeAs('category', $imageName, 'local');
             } else {
                 $imageName = $category->image;
             }

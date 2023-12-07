@@ -37,8 +37,8 @@ class SliderController extends Controller
                     $constraint->aspectRatio();
                 })->encode('png', 80);
 
+                $image->storeAs('sliders', $imageName, 'local');
 
-                $image->move(public_path('upload/sliders'), $imageName, $photo);
 
             } else {
                 $imageName = 'default.png';
@@ -119,18 +119,16 @@ class SliderController extends Controller
             if ($image) {
                 $currentDate = Carbon::now()->toDateString();
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-                if (!file_exists('upload/sliders')) {
-                    mkdir('upload/sliders', 0777, true);
-                }
-                if (file_exists('upload/sliders/' . $slider->image)) {
-                    unlink('upload/sliders/' . $slider->image);
-                }
-                $image->move(public_path('upload/sliders'), $imageName);
+
+                // Eliminar la imagen antigua si existe en el disco local
+                Storage::disk('local')->delete('sliders/' .$slider->image);
+
+                // Guardar la nueva imagen en el disco local
+                $image->storeAs('sliders', $imageName, 'local');
 
             } else {
                 $imageName = $slider->image;
             }
-
             $slider->title = $request->update_title;
             $slider->sub_title = $request->update_sub_title;
             $slider->image = $imageName;
@@ -143,7 +141,7 @@ class SliderController extends Controller
         }else {
             return response()->json([
                 'message' => $validation->errors()->all(),
-                'class_name' => 'alert alert-danger',
+                'class_name' => 'error',
             ]);
         }
         //return response()->json($request);

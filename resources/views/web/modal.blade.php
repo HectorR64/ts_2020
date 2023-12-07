@@ -13,7 +13,7 @@
           <button type="button" class="close d-inline pull-right mt-2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
           <div class="modal-title text-center">
             <span class="ms-logo-sm mr-1"><img src="web/iconos/taco.ico" height="70px" width="70px"> </span>
-            <h1 class="logolet">Taco Santo</span></h1>
+            <h1 class="logolet">Tacos Luna</span></h1>
           </div>
           <div class="modal-header-tabs">
             <ul class="nav nav-tabs nav-tabs-full nav-tabs-2 nav-tabs-primary" role="tablist">

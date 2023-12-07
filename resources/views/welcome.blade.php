@@ -155,7 +155,7 @@
               </div>
             </div> <!-- container -->
           </div >
-          <iframe id="ubicacion" width="100%" height="340" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4478.433049344633!2d-99.64080601818613!3d19.28678848784068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd894879085083%3A0x752dd80c79b5d84f!2sTaco%20Santo!5e0!3m2!1sen!2smx!4v1614884551981!5m2!1sen!2smx"></iframe>
+          <iframe id="ubicacion" width="100%" height="340" src="https://www.google.com/maps/embed?pb=!4m10!1m2!2m1!1soxxo!3m6!1s0x85cdf517024d34a7:0xd5b8b7ea3ccf8945!8m2!3d19.2867756!4d-99.5194683!15sCgRveHhvIgOIAQFaBiIEb3h4b5IBEWNvbnZlbmllbmNlX3N0b3Jl4AEA!16s%2Fg%2F11b64c8q3q?entry=ttuhttps://www.google.com.mx/maps/place/Oxxo/@19.2867753,-99.526205,16z/data=!4m10!1m2!2m1!1soxxo!3m6!1s0x85cdf517024d34a7:0xd5b8b7ea3ccf8945!8m2!3d19.2867756!4d-99.5194683!15sCgRveHhvIgOIAQFaBiIEb3h4b5IBEWNvbnZlbmllbmNlX3N0b3Jl4AEA!16s%2Fg%2F11b64c8q3q?"></iframe>
         </section>
 
 

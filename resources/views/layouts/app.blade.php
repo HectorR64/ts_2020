@@ -44,12 +44,6 @@
         <!-- End Navbar -->
 
         @yield('content')
-
-        <!-- Footer -->
-        @if (Request::is('admin*'))
-            @include('admin.includes.footer')
-        @endif
-        <!-- Footer -->
     </div>
   </div>
 

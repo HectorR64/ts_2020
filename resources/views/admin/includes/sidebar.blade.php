@@ -1,16 +1,16 @@
 <div class="sidebar" data-color="azure" data-background-color="white" data-image="../../assets/img/sidebar-1.jpg">
     <div class="logo"><a href="http://www.creative-tim.com/" class="simple-text logo-mini">
         <a href="{{route('admin.dashboard')}}" class="simple-text logo-mini">
-            <img src="{{asset('web/img/circ1.png')}}" height="55px" width="55px">
+            <img src="{{asset('web/img/logb.png')}}" height="55px" width="55px">
           </a>
            <a href="{{route('admin.dashboard')}}" class="simple-text logo-normal">
-            Taco Santo
+            Tacos Luna
           </a>
         </div>
         <div class="sidebar-wrapper">
           <div class="user">
             <div class="photo">
-              <img src="" style=" border-radius:38px;" height="38px" width="38px"/>
+              <img src="{{asset('web/iconos/taco.ico')}}"web style=" border-radius:38px;" height="38px" width="38px"/>
             </div>
             <div class="user-info">
               <a data-toggle="collapse" href="#collapseExample" class="username">
