@@ -10,7 +10,7 @@ use App\Models\Category;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
@@ -32,9 +32,9 @@ class ItemController extends Controller
     public function destroy($id){
         if($id){
             $item = Product::findOrFail($id);
-            if (file_exists('upload/items/'.$item->image)) {
-                unlink('upload/items/'.$item->image);
-            }
+
+                Storage::disk('local')->delete('public/items/' . $item->image);
+
 
             $del = $item->delete();
             if($del){
@@ -69,10 +69,11 @@ class ItemController extends Controller
             if ($image) {
                 $currentDate = Carbon::now()->toDateString();
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-                if (!file_exists('upload/items')) {
-                    mkdir('upload/items', 0777, true);
-                }
-                $image->move(public_path('upload/items'), $imageName);
+
+                // Guardar imagen en el disco local
+                Storage::disk('local')->putFileAs('public/items', $image, $imageName);
+
+
             } else {
                 $imageName = 'default.png';
             }
@@ -182,13 +183,12 @@ class ItemController extends Controller
             if ($image) {
                 $currentDate = Carbon::now()->toDateString();
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-                if (!file_exists('upload/items')) {
-                    mkdir('upload/items', 0777, true);
-                }
-                if (file_exists('upload/items/'.$item->image)) {
-                    unlink('upload/items/'.$item->image);
-                }
-                $image->move(public_path('upload/items'), $imageName);
+
+                // Eliminar la imagen antigua si existe en el disco local
+                Storage::disk('local')->delete('public/items/' . $item->image);
+
+                // Guardar la nueva imagen en el disco local
+                $image->storeAs('public/items', $imageName, 'local');
             } else {
                 $imageName = $item->image;
             }

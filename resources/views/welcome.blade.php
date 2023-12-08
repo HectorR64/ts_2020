@@ -22,7 +22,7 @@
                     <?php echo $i='';?>
                      @foreach ($sliders as $slider)
                   <div class="carousel-item <?php if($i ==1){echo"active";}?>">
-                    <img class="d-block img-fluid" src="../../upload/sliders/{{$slider->image}}" alt="...">
+                    <img class="d-block img-fluid" src="{{asset('/storage/sliders')}}/{{$slider->image}}" alt="...">
                     <div class="carousel-caption">
                       <h3>{{$slider->title}}</h3>
                       <p>{{$slider->sub_title}}.</p>
@@ -47,9 +47,9 @@
           <h3 class="text-center fw-500 mb-3">Menu</h3>
           <div class="mw-800 center-block mb-3">
             <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-4" role="tablist">
-              <li role="presentation" class="nav-item"><a class="nav-link filter active withoutripple" href="#home7" aria-controls="home7" role="tab" data-toggle="tab" data-filter="all"><img src="web/iconos/santo.png" height="32" width="32" /></i> <span class="d-none d-md-inline">Todo</span></a></li>
+              <li role="presentation" class="nav-item"><a class="nav-link filter active withoutripple" href="#home7" aria-controls="home7" role="tab" data-toggle="tab" data-filter="all"><img src="web/iconos/taco.png" height="32" width="32" /></i> <span class="d-none d-md-inline">Todo</span></a></li>
               @foreach($categorys as $category)
-              <li role="presentation" class="nav-item"><a class="nav-link filter withoutripple" href="#profile7" aria-controls="profile7" role="tab" data-toggle="tab" data-filter=".{{ $category->slug }}"><img src="../../upload/category/{{$category->image}}" height="32" width="32"></i> <span class="d-none d-md-inline">{{ $category->name }}</span></a></li>
+              <li role="presentation" class="nav-item"><a class="nav-link filter withoutripple" href="#profile7" aria-controls="profile7" role="tab" data-toggle="tab" data-filter=".{{ $category->slug }}"><img src="{{asset('/storage/category')}}/{{$category->image}}" height="32" width="32"></i> <span class="d-none d-md-inline">{{ $category->name }}</span></a></li>
               @endforeach
             </ul>
           </div>
@@ -58,7 +58,7 @@
             <div class="col-lg-4 col-sm-6 mix {{ $product->category->slug }}">
               <div class="card">
                 <figure class="ms-thumbnail">
-                  <img src="{{ $product -> image_path }}" alt="" class="img-fluid">
+                  <img src="{{asset('/storage/items')}}/{{$product->image}}" alt="" class="img-fluid">
                   <figcaption class="ms-thumbnail-caption text-center">
                     <div class="ms-thumbnail-caption-content">
                         <h3 class="ms-thumbnail-caption-title">{{$product-> product_name}}</h3>

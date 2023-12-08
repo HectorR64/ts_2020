@@ -69,7 +69,7 @@
                           <td class="text-center">{{$slider->id}}</td>
                           <td>{{$slider->title}}</td>
                           <td>{{$slider->sub_title}}</td>
-                          <td> <img src="../../upload/sliders/{{$slider->image}}"width="200px" height="120px" class="rounded"/></td>
+                          <td> <img src="{{asset('/storage/sliders')}}//{{$slider->image}}"width="200px" height="120px" class="rounded"/></td>
                          <td HEIGHT="80" WIDTH="300">
                          <div class="form-check">
                          <label class="form-check-label">

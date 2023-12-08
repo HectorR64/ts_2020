@@ -8,6 +8,7 @@ use Image;
 use Intervention\Image\Exception\NotReadableException;
 use App\Slider;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
@@ -37,8 +38,7 @@ class SliderController extends Controller
                     $constraint->aspectRatio();
                 })->encode('png', 80);
 
-                $image->storeAs('sliders', $imageName, 'local');
-
+                Storage::disk('local')->putFileAs('public/sliders', $image, $imageName);
 
             } else {
                 $imageName = 'default.png';
@@ -85,9 +85,7 @@ class SliderController extends Controller
     public function destroy($id){
         if($id){
             $slider = Slider::findOrFail($id);
-            if (file_exists('upload/sliders/'.$slider->image)) {
-                unlink('upload/sliders/'.$slider->image);
-            }
+            Storage::disk('local')->delete('public/sliders/' . $slider->image);
             $slider->delete();
             return response()->json([
                 "message" => "Hecjo! Dato eliminado correctamente:)",
@@ -121,7 +119,7 @@ class SliderController extends Controller
                 $imageName = $currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
                 // Eliminar la imagen antigua si existe en el disco local
-                Storage::disk('local')->delete('sliders/' .$slider->image);
+                Storage::disk('local')->delete('public/sliders/' .$slider->image);
 
                 // Guardar la nueva imagen en el disco local
                 $image->storeAs('sliders', $imageName, 'local');

@@ -11,7 +11,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item active">
-                <img  src="{{ $product -> image_path }}" >
+                <img  src="{{asset('/storage/items')}}/{{ $product -> image }}" >
               </div>
               <div class="carousel-item">
                 <img src="assets/img/demo/products/2.jpg" alt="...">

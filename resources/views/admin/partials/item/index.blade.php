@@ -102,7 +102,7 @@ aria-expanded="true"
                         @foreach ($products as $product)
                         <tr>
                           <td class="text-center">{{$product->id}}</td>
-                          <td><img src="{{ $product -> image_path }}" style="border-radius: 50%; width: 50px; height: 50px;"></td>
+                          <td><img src="{{asset('/storage/items')}}/{{ $product -> image }}" style="border-radius: 50%; width: 50px; height: 50px;"></td>
                           <td>{{$product->product_name}}</td>
                           <td>{{$product->description}}</td>
                           <td>{{$product->category->name}}</td>
